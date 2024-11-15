@@ -41,5 +41,11 @@
   "packageManager": "yarn@3.2.3",
   "engines": {
     "node": ">=18.18.0"
+  },
+  "dependencies": {
+    "@web3auth/base": "^9.4.0",
+    "@web3auth/ethereum-provider": "^9.4.0",
+    "@web3auth/modal": "^9.4.0",
+    "web3": "^4.15.0"
   }
 }
