@@ -7,7 +7,7 @@ import {
   CogIcon,
   PaperAirplaneIcon,
   WalletIcon,
-  XMarkIcon
+  XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { ReactNode, useState } from "react";
 
@@ -89,7 +89,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                             className={classNames(
                               item.current
                                 ? "bg-primary text-primary"
-                                : "text-neutral hover:bg-primary hover:text-primary",
+                                : "text-base hover:bg-primary hover:text-primary",
                               "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
                             )}
                           >
@@ -117,7 +117,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                               className={classNames(
                                 item.current
                                   ? "bg-primary text-primary"
-                                  : "text-neutral hover:bg-primary hover:text-primary",
+                                  : "text-base hover:bg-primary hover:text-primary",
                                 "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
                               )}
                             >
@@ -164,9 +164,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                       <a
                         href={item.href}
                         className={classNames(
-                          item.current
-                            ? "bg-base-200 text-primary"
-                            : "text-neutral hover:bg-base-200 hover:text-primary",
+                          item.current ? "bg-base-200 text-primary" : "text-base hover:bg-base-200 hover:text-primary",
                           "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
                         )}
                       >
@@ -191,9 +189,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                       <a
                         href={item.href}
                         className={classNames(
-                          item.current
-                            ? "bg-base-200 text-primary"
-                            : "text-neutral hover:bg-base-200 hover:text-primary",
+                          item.current ? "bg-base-200 text-primary" : "text-base hover:bg-base-200 hover:text-primary",
                           "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
                         )}
                       >
@@ -213,7 +209,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
               <li className="-mx-6 mt-auto">
                 <a
                   href="#"
-                  className="flex items-center gap-x-4 px-6 py-3 text-sm/6 font-semibold text-neutral hover:bg-base-200"
+                  className="flex items-center gap-x-4 px-6 py-3 text-sm/6 font-semibold text-base hover:bg-base-200"
                 >
                   <img
                     alt=""
@@ -230,11 +226,11 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
       </div>
 
       <div className="sticky top-0 z-40 flex items-center gap-x-6 bg-base-100 px-4 py-4 shadow-sm sm:px-6 lg:hidden">
-        <button type="button" onClick={() => setSidebarOpen(true)} className="-m-2.5 p-2.5 text-neutral lg:hidden">
+        <button type="button" onClick={() => setSidebarOpen(true)} className="-m-2.5 p-2.5 text-base lg:hidden">
           <span className="sr-only">Open sidebar</span>
           <Bars3Icon aria-hidden="true" className="size-6 opacity-90" />
         </button>
-        <div className="flex-1 text-sm/6 font-semibold text-neutral">Dashboard</div>
+        <div className="flex-1 text-sm/6 font-semibold text-base">Dashboard</div>
         <a href="#">
           <span className="sr-only">Your profile</span>
           <img
