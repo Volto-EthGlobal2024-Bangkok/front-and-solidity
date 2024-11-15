@@ -2,12 +2,12 @@
 
 import { Dialog, DialogBackdrop, DialogPanel, TransitionChild } from "@headlessui/react";
 import {
+  ArrowsRightLeftIcon,
   Bars3Icon,
-  ChartBarIcon,
-  DocumentTextIcon,
-  HomeIcon,
+  CogIcon,
+  PaperAirplaneIcon,
   WalletIcon,
-  XMarkIcon,
+  XMarkIcon
 } from "@heroicons/react/24/outline";
 import { ReactNode, useState } from "react";
 
@@ -34,21 +34,18 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
+const navigation: SidebarLink[] = [
+  { name: "Overview", href: "/overview", icon: WalletIcon, current: false },
+  { name: "Settings", href: "/settings", icon: CogIcon, current: false },
+];
+
+const actions: SidebarLink[] = [
+  { name: "Send", href: "/send", icon: PaperAirplaneIcon, current: false },
+  { name: "Swap", href: "/swap", icon: ArrowsRightLeftIcon, current: false },
+];
+
 export function DashboardLayout({ children }: DashboardLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  const navigation: SidebarLink[] = [
-    { name: "Dashboard", href: "/", icon: HomeIcon, current: true },
-    { name: "Wallets", href: "/wallets", icon: WalletIcon, current: false },
-    { name: "Analytics", href: "/analytics", icon: ChartBarIcon, current: false },
-    { name: "Documents", href: "/documents", icon: DocumentTextIcon, current: false },
-  ];
-
-  const wallets: Wallet[] = [
-    { id: 1, name: "Main Wallet", href: "#", initial: "M", current: true },
-    { id: 2, name: "Development Wallet", href: "#", initial: "D", current: false },
-    { id: 3, name: "Test Wallet", href: "#", initial: "T", current: false },
-  ];
 
   return (
     <>
@@ -109,32 +106,29 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                       ))}
                     </ul>
                   </li>
-                  {wallets.length > 0 && (
+                  {actions.length > 0 && (
                     <li>
-                      <div className="text-xs/6 font-semibold text-neutral-content">Your wallets</div>
+                      <div className="text-xs/6 font-semibold text-neutral-content">Actions</div>
                       <ul role="list" className="-mx-2 mt-2 space-y-1">
-                        {wallets.map(wallet => (
-                          <li key={wallet.name}>
+                        {actions.map(item => (
+                          <li key={item.name} className="w-full">
                             <a
-                              href={wallet.href}
+                              href={item.href}
                               className={classNames(
-                                wallet.current
-                                  ? "bg-base-200 text-primary"
-                                  : "text-neutral hover:bg-base-200 hover:text-primary",
+                                item.current
+                                  ? "bg-primary text-primary"
+                                  : "text-neutral hover:bg-primary hover:text-primary",
                                 "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
                               )}
                             >
-                              <span
+                              <item.icon
+                                aria-hidden="true"
                                 className={classNames(
-                                  wallet.current
-                                    ? "border-primary text-primary/90"
-                                    : "border-primary text-primary/60 group-hover:border-primary group-hover:text-primary/90",
-                                  "flex size-6 shrink-0 items-center justify-center rounded-lg border bg-base-100 text-[0.625rem] font-medium",
+                                  item.current ? "text-primary" : "text-primary/60 group-hover:text-primary",
+                                  "size-6 shrink-0",
                                 )}
-                              >
-                                {wallet.initial}
-                              </span>
-                              <span className="truncate">{wallet.name}</span>
+                              />
+                              {item.name}
                             </a>
                           </li>
                         ))}
@@ -163,6 +157,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
           <nav className="flex flex-1 flex-col">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
               <li>
+                <div className="text-xs/6 font-semibold text-base">Portfolio</div>
                 <ul role="list" className="-mx-2 space-y-1">
                   {navigation.map(item => (
                     <li key={item.name}>
@@ -188,38 +183,33 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                   ))}
                 </ul>
               </li>
-              {wallets.length > 0 && (
-                <li>
-                  <div className="text-xs/6 font-semibold text-neutral-content">Your wallets</div>
-                  <ul role="list" className="-mx-2 mt-2 space-y-1">
-                    {wallets.map(wallet => (
-                      <li key={wallet.name}>
-                        <a
-                          href={wallet.href}
+              <li>
+                <div className="text-xs/6 font-semibold text-base">Actions</div>
+                <ul role="list" className="-mx-2 space-y-1">
+                  {actions.map(item => (
+                    <li key={item.name}>
+                      <a
+                        href={item.href}
+                        className={classNames(
+                          item.current
+                            ? "bg-base-200 text-primary"
+                            : "text-neutral hover:bg-base-200 hover:text-primary",
+                          "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
+                        )}
+                      >
+                        <item.icon
+                          aria-hidden="true"
                           className={classNames(
-                            wallet.current
-                              ? "bg-base-200 text-primary"
-                              : "text-neutral hover:bg-base-200 hover:text-primary",
-                            "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
+                            item.current ? "text-primary" : "text-primary/60 group-hover:text-primary",
+                            "size-6 shrink-0",
                           )}
-                        >
-                          <span
-                            className={classNames(
-                              wallet.current
-                                ? "border-primary text-primary/90"
-                                : "border-base-300 text-neutral-content/90 group-hover:border-primary group-hover:text-primary/90",
-                              "flex size-6 shrink-0 items-center justify-center rounded-lg border bg-base-100 text-[0.625rem] font-medium",
-                            )}
-                          >
-                            {wallet.initial}
-                          </span>
-                          <span className="truncate">{wallet.name}</span>
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              )}
+                        />
+                        {item.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </li>
               <li className="-mx-6 mt-auto">
                 <a
                   href="#"
