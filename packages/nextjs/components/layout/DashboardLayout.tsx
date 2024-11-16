@@ -77,6 +77,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                 <span className="text-xl font-bold">Volto</span>
               </div>
               <AccountCard />
+              <button className="btn btn-primary w-full">Activate Wallet</button>
               <nav className="flex flex-1 flex-col">
                 <ul role="list" className="flex flex-1 flex-col gap-y-7">
                   <li>
@@ -150,6 +151,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
             <span className="text-xl font-bold">Volto</span>
           </div>
           <AccountCard/>
+          <button className="btn btn-primary w-full">Activate Wallet</button>
           <nav className="flex flex-1 flex-col">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
               <li>
