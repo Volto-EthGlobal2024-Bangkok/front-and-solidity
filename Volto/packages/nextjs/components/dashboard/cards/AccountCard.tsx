@@ -1,7 +1,7 @@
 "use client";
 
 import { PaperAirplaneIcon, PlusIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Address, Balance } from "~~/components/scaffold-eth";
 import { clsx } from "~~/components/utils";
 
@@ -12,15 +12,40 @@ interface AccountCardProps {
 
 export const AccountCard = ({ addresses, className }: AccountCardProps) => {
   const [selectedAddress, setSelectedAddress] = useState(addresses[0]);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleDropdownPosition = () => {
+      if (dropdownRef.current) {
+        const dropdown = dropdownRef.current;
+        const rect = dropdown.getBoundingClientRect();
+        const viewportWidth = window.innerWidth;
+
+        if (rect.right > viewportWidth) {
+          dropdown.style.left = 'auto';
+          dropdown.style.right = '0';
+        } else {
+          dropdown.style.left = '0';
+          dropdown.style.right = 'auto';
+        }
+      }
+    };
+
+    handleDropdownPosition();
+    window.addEventListener('resize', handleDropdownPosition);
+
+    return () => {
+      window.removeEventListener('resize', handleDropdownPosition);
+    };
+  }, []);
 
   return (
     <div className={clsx("card bg-base-100 shadow-xl min-w-[calc(427px + 30px)]", className)}>
       <div className="card-body p-4">
         <div className="flex flex-col gap-3 h-full justify-between">
-          <div className="flex flex-col gap-3">
-            <div className="flex items-center justify-between">
-              <Balance address={selectedAddress} />
-              <div className="dropdown dropdown-end">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+            <div className="dropdown dropdown-start">
                 <label tabIndex={0} className="btn btn-ghost btn-sm">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -33,7 +58,11 @@ export const AccountCard = ({ addresses, className }: AccountCardProps) => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                   </svg>
                 </label>
-                <ul tabIndex={0} className="dropdown-content z-[1] menu w-[550px] p-2 shadow bg-base-100 rounded-box">
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content p-2 shadow bg-base-100 rounded-box"
+                  style={{ zIndex: 9999} }
+                >
                   {addresses.map(address => (
                     <li key={address} onClick={() => setSelectedAddress(address)}>
                       <Address address={address} format="long" />
@@ -41,18 +70,17 @@ export const AccountCard = ({ addresses, className }: AccountCardProps) => {
                   ))}
                 </ul>
               </div>
+              <button className="btn btn-ghost btn-sm ml-2">
+                <PlusIcon className="h-4 w-4" />
+              </button>
             </div>
-            <Address address={selectedAddress} format="long" />
+            <Balance address={selectedAddress} />
           </div>
+          <Address address={selectedAddress} format="long" className="truncate" />
           <div className="flex gap-2 w-full">
-            <button className="btn btn-sm gap-2 flex-1">
-              <PlusIcon className="h-4 w-4" />
-              Add Account
-            </button>
-            <button className="btn btn-sm gap-2 flex-1">
+{/*             <button className="btn btn-sm flex-1">
               <PaperAirplaneIcon className="h-4 w-4" />
-              Send To
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

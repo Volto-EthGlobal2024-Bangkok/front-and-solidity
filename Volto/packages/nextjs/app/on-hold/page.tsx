@@ -8,7 +8,6 @@ const OnHoldTransactions: NextPage = () => {
       <div className="w-full h-40 bg-gray-200 flex items-center justify-center">
         <p className="text-base-content/60">Graph will be here</p>
       </div>
-      
       {/* List of transactions on hold */}
       <div className="text-center mt-4">
         <ClockIcon className="w-16 h-16 text-base-content/20" />
