@@ -33,7 +33,7 @@ const IDKitWidgetComponent = dynamic(() => import('../../components/IDKitWidgetC
 const navigation: SidebarLink[] = [
   { name: "Overview", href: "/assets", icon: WalletIcon, current: false },
   { name: "Settings", href: "/settings/accounts", icon: CogIcon, current: false },
-  { name: "Transactions", href: "/on-hold", icon: CubeTransparentIcon, current: false },
+  { name: "Transactions", href: "/transactions", icon: CubeTransparentIcon, current: false },
   { name: "Transactions On Hold", href: "/on-hold", icon: PauseIcon, current: false },
 
 ];
@@ -76,13 +76,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                 <Logo size="sm" />
                 <span className="text-xl font-bold">Volto</span>
               </div>
-              <AccountCard
-                addresses={[
-                  "0x1234567890123456789012345678901234567890",
-                  "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
-                  "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
-                ]}
-              />
+              <AccountCard />
               <nav className="flex flex-1 flex-col">
                 <ul role="list" className="flex flex-1 flex-col gap-y-7">
                   <li>
@@ -155,13 +149,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
             <Logo size="sm" />
             <span className="text-xl font-bold">Volto</span>
           </div>
-          <AccountCard
-            addresses={[
-              "0x1234567890123456789012345678901234567890",
-              "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
-              "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
-            ]}
-          />
+          <AccountCard/>
           <nav className="flex flex-1 flex-col">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
               <li>

@@ -1,16 +1,5 @@
 import React from "react";
-
-interface Token {
-  symbol: string;
-  name: string;
-  balance: string;
-  price: string;
-  value: string;
-  tokenId: string;
-  owner: string;
-  status: string;
-  lastUpdated: string;
-}
+import { Token } from "./TokenContext";
 
 interface TokenItemProps {
   token: Token;
@@ -20,11 +9,22 @@ interface TokenItemProps {
 const TokenItem: React.FC<TokenItemProps> = ({ token, onClick }) => {
   return (
     <div className="cursor-pointer hover:bg-base-200 p-4 transition-colors duration-200" onClick={onClick}>
-      <div className="grid grid-cols-5 gap-4 items-center">
+      <div className="grid grid-cols-7 gap-4 items-center">
         <div className="col-span-1 flex items-center gap-2">
           <div className="font-bold text-lg">{token.symbol}</div>
           <div className="text-sm opacity-50">{token.name}</div>
         </div>
+
+        <div className="text-right">
+          <span className="text-sm text-gray-500">Balance</span>
+          <div className="font-medium">{token.balance}</div>
+        </div>
+
+        <div className="text-right">
+          <span className="text-sm text-gray-500">Price</span>
+          <div className="font-medium">${token.price.toFixed(2)}</div>
+        </div>
+
         <div className="text-right">
           <span className="text-sm text-gray-500">Token ID</span>
           <div className="font-medium">{token.tokenId}</div>
@@ -42,11 +42,15 @@ const TokenItem: React.FC<TokenItemProps> = ({ token, onClick }) => {
 
         <div className="text-right">
           <span className="text-sm text-gray-500">Last Updated</span>
-          <div className="font-medium">{token.lastUpdated}</div>
-        </div>
-
-        <div className="flex justify-end">
-          <button className="btn btn-ghost btn-sm">Details →</button>
+          <div className="font-medium">
+            {new Date(token.lastUpdated).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit'
+            })}
+          </div>
         </div>
       </div>
     </div>
