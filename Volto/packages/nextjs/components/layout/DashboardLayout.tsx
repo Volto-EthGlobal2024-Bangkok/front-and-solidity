@@ -10,6 +10,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { ReactNode, useState } from "react";
+import { Logo } from "../Logo";
 import { clsx } from "../utils";
 
 interface SidebarLink {
@@ -60,11 +61,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
             {/* Sidebar component, swap this element with another sidebar if you like */}
             <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-base-100 px-6 pb-2">
               <div className="flex h-16 shrink-0 items-center gap-x-2">
-                <img
-                  alt="Your Company"
-                  src="https://tailwindui.com/plus/img/logos/mark.svg?color=green&shade=600"
-                  className="h-8 w-auto"
-                />
+                <Logo size="sm" />
                 <span className="text-xl font-bold">Volto</span>
               </div>
               <nav className="flex flex-1 flex-col">
@@ -136,12 +133,8 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
         {/* Sidebar component, swap this element with another sidebar if you like */}
         <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-base-300 bg-base-100 px-6">
           <div className="flex gap-2 h-16 shrink-0 items-center">
-            <img
-              alt="Your Company"
-              src="https://tailwindui.com/plus/img/logos/mark.svg?color=green&shade=600"
-              className="h-8 w-auto"
-            />
-            <span className="text-xl font-bold mt-1">Volto</span>
+            <Logo size="sm" />
+            <span className="text-xl font-bold">Volto</span>
           </div>
           <nav className="flex flex-1 flex-col">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">

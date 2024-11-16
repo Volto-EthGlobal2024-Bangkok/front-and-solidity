@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { Logo } from "../Logo";
 
 type FormInputs = {
   email: string;
@@ -25,11 +26,7 @@ export const SigninWithEmailForm = () => {
     <div className="card w-96">
       <div className="card-body gap-4">
         <div className="flex flex-col items-center gap-4 mb-6">
-          <img
-            alt="Volto"
-            src="https://tailwindui.com/plus/img/logos/mark.svg?color=green&shade=600"
-            className="w-auto h-16 w-16"
-          />
+          <Logo />
           <h1 className="text-4xl font-bold">Volto</h1>
           <p className="text-base-content/80">Enter your email to continue</p>
         </div>

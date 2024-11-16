@@ -12,7 +12,7 @@ module.exports = {
       {
         light: {
           "color-scheme": "light",
-          primary: colors.green[400],
+          primary: "#729B25",
           secondary: colors.orange[500],
           "secondary-content": colors.white,
           accent: colors.cyan[600],
@@ -27,7 +27,7 @@ module.exports = {
       {
         dark: {
           "color-scheme": "dark",
-          primary: colors.green[600],
+          primary: "#729B25",
           secondary: colors.orange[500],
           accent: colors.orange[600],
           "base-100": colors.black,
