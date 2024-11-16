@@ -30,7 +30,7 @@ interface DashboardLayoutProps {
 const navigation: SidebarLink[] = [
   { name: "Overview", href: "/assets", icon: WalletIcon, current: false },
   { name: "Settings", href: "/settings/accounts", icon: CogIcon, current: false },
-  { name: "Transactions", href: "/on-hold", icon: CubeTransparentIcon, current: false },
+  { name: "Transactions", href: "/transactions", icon: CubeTransparentIcon, current: false },
   { name: "Transactions On Hold", href: "/on-hold", icon: PauseIcon, current: false },
 ];
 

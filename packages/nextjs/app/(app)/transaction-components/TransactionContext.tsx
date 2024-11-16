@@ -9,7 +9,7 @@ interface Transaction {
   to: string;
   token: string;
   chain: string;
-  timeLeft: string;
+  maxHoldTime: number;
 }
 
 interface TransactionContextType {
@@ -32,7 +32,6 @@ interface TransactionProviderProps {
 }
 
 export const TransactionProvider: React.FC<TransactionProviderProps> = ({ children }) => {
-  // Updated hardcoded transactions with new fields
   const initialTransactions: Transaction[] = [
     {
       id: "1",
@@ -43,7 +42,7 @@ export const TransactionProvider: React.FC<TransactionProviderProps> = ({ childr
       to: "0x1234567890abcdef",
       token: "ETH",
       chain: "Ethereum",
-      timeLeft: "1 minute",
+      maxHoldTime: Date.now() + 60000,
     },
     {
       id: "2", 
@@ -54,7 +53,7 @@ export const TransactionProvider: React.FC<TransactionProviderProps> = ({ childr
       to: "0xfedcba0987654321", 
       token: "BTC",
       chain: "Bitcoin",
-      timeLeft: "2 minutes",
+      maxHoldTime: Date.now() + 120000,
     },
     {
       id: "3",
@@ -65,29 +64,29 @@ export const TransactionProvider: React.FC<TransactionProviderProps> = ({ childr
       to: "0x9876543210fedcba",
       token: "USDT",
       chain: "Polygon",
-      timeLeft: "5 minutes",
+      maxHoldTime: Date.now() + 5 * 60 * 1000,
     },
     {
       id: "4",
       amount: "300",
       date: new Date().toISOString(),
-      status: "pending",
+      status: "done",
       from: "0x2468ace0246810ac",
       to: "0x1357bdf1357bdf13",
       token: "MATIC",
       chain: "Polygon",
-      timeLeft: "10 minutes",
+      maxHoldTime: Date.now() - 1,
     },
     {
       id: "5",
       amount: "500",
       date: new Date().toISOString(),
-      status: "pending",
+      status: "done",
       from: "0xaaaa1111bbbb2222",
       to: "0xcccc3333dddd4444",
       token: "USDC",
       chain: "Ethereum",
-      timeLeft: "15 minutes",
+      maxHoldTime: Date.now() - 1,
     },
     {
       id: "6",
@@ -98,7 +97,7 @@ export const TransactionProvider: React.FC<TransactionProviderProps> = ({ childr
       to: "0x3333cccc4444dddd",
       token: "ETH",
       chain: "Ethereum",
-      timeLeft: "20 minutes",
+      maxHoldTime: Date.now() + 20 * 60 * 1000,
     },
     {
       id: "7",
@@ -109,7 +108,7 @@ export const TransactionProvider: React.FC<TransactionProviderProps> = ({ childr
       to: "0x8765hgfe4321dcba",
       token: "BNB",
       chain: "BSC",
-      timeLeft: "25 minutes",
+      maxHoldTime: Date.now() + 25 * 60 * 1000,
     },
     {
       id: "8",
@@ -120,7 +119,7 @@ export const TransactionProvider: React.FC<TransactionProviderProps> = ({ childr
       to: "0x5555444433332222",
       token: "AVAX",
       chain: "Avalanche",
-      timeLeft: "30 minutes",
+      maxHoldTime: Date.now() + 30 * 60 * 1000,
     },
     {
       id: "9",
@@ -131,7 +130,7 @@ export const TransactionProvider: React.FC<TransactionProviderProps> = ({ childr
       to: "0xeeeeffffgggghhhh",
       token: "SOL",
       chain: "Solana",
-      timeLeft: "35 minutes",
+      maxHoldTime: Date.now() + 35 * 60 * 1000,
     },
     {
       id: "10",
@@ -142,7 +141,7 @@ export const TransactionProvider: React.FC<TransactionProviderProps> = ({ childr
       to: "0x5e5e6f6f7g7g8h8h",
       token: "DOT",
       chain: "Polkadot",
-      timeLeft: "40 minutes",
+      maxHoldTime: Date.now() + 40 * 60 * 1000,
     },
     {
       id: "11",
@@ -153,7 +152,7 @@ export const TransactionProvider: React.FC<TransactionProviderProps> = ({ childr
       to: "0x1357bdf1357bdf13",
       token: "LINK",
       chain: "Ethereum",
-      timeLeft: "45 minutes",
+      maxHoldTime: Date.now() + 45 * 60 * 1000,
     },
     {
       id: "12",
@@ -164,7 +163,7 @@ export const TransactionProvider: React.FC<TransactionProviderProps> = ({ childr
       to: "0x1234567812345678",
       token: "UNI",
       chain: "Ethereum",
-      timeLeft: "50 minutes",
+      maxHoldTime: Date.now() + 50 * 60 * 1000,
     },
     // Add more transactions as needed
   ];
@@ -177,3 +176,5 @@ export const TransactionProvider: React.FC<TransactionProviderProps> = ({ childr
 
   return <TransactionContext.Provider value={{ transactions, addTransaction }}>{children}</TransactionContext.Provider>;
 }; 
+
+export type { Transaction };

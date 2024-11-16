@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TokenItem from './TokenItem';
 import { useTokens } from './TokenContext';
 
@@ -8,14 +8,23 @@ const DashboardAssets: React.FC = () => {
   const tokens = useTokens();
   const [visibleCount, setVisibleCount] = useState(10);
   const [showMyTokens, setShowMyTokens] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleReadMore = () => {
     setVisibleCount((prevCount) => prevCount + 10);
   };
 
   const filteredTokens = showMyTokens 
-    ? tokens.filter(token => parseFloat(token.balance?.toString() || '0') > 0) 
+    ? tokens.filter(token => parseFloat(token.balance?.toString() || "0") > 0) 
     : tokens;
+
+  if (!isClient) {
+    return null; // or a loading spinner
+  }
 
   return (
     <div className="w-full">
@@ -35,9 +44,13 @@ const DashboardAssets: React.FC = () => {
           key={index} 
           token={{ 
             ...token, 
-            balance: token.balance?.toString() || "0",
-            value: token.value?.toString() || "",
-            price: token.price?.toString() || ""
+            balance: token.balance || 0,
+            value: token.value || 0,
+            price: token.price || 0,
+            tokenId: token.id || "",
+            owner: token.owner || "Unknown",
+            status: token.status || "Unknown",
+            lastUpdated: token.lastUpdated || new Date().toISOString()
           }} 
           onClick={() => console.log(`Clicked on ${token.name}`)} 
         /> 

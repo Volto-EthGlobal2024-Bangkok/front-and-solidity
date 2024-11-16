@@ -4,10 +4,13 @@ import React, { useState, useEffect } from 'react';
 import TransactionList from '../transaction-components/TransactionList';
 import { useTransactions } from '../transaction-components/TransactionContext';
 
-const OnHoldTransactions: React.FC = () => {
+const DoneTransactions: React.FC = () => {
   const { transactions } = useTransactions();
   const [visibleCount, setVisibleCount] = useState(10);
   const [, setRefresh] = useState(0);
+
+  // Filter for completed transactions only
+  const completedTransactions = transactions.filter(transaction => transaction.status === "done");
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -16,9 +19,11 @@ const OnHoldTransactions: React.FC = () => {
 
     return () => clearInterval(timer);
   }, []);
+
   const handleReadMore = () => {
     setVisibleCount(prevCount => prevCount + 10);
   };
+
 
   return (
     <div className="w-full">
@@ -30,19 +35,21 @@ const OnHoldTransactions: React.FC = () => {
         <span className="flex-1 font-semibold">Time Left</span>
       </div>
       <TransactionList 
-        transactions={transactions.slice(0, visibleCount).map(transaction => ({
-          ...transaction,
-          timeLeft: calculateTimeLeft(Number(transaction.maxHoldTime)),
-          id: transaction.id,
-          amount: transaction.amount,
-          date: transaction.date,
-          status: transaction.status,
-          from: transaction.from,
-          to: transaction.to,
-          token: transaction.token,
-          chain: transaction.chain,
-        }))}/>
-      {visibleCount < transactions.length && (
+        transactions={completedTransactions
+          .slice(0, visibleCount)
+          .map(transaction => ({
+            ...transaction,
+            timeLeft: calculateTimeLeft(Number(transaction.maxHoldTime)),
+            id: transaction.id,
+            amount: transaction.amount,
+            date: transaction.date,
+            status: transaction.status,
+            from: transaction.from,
+            to: transaction.to,
+            token: transaction.token,
+            chain: transaction.chain,
+          }))}/>
+      {visibleCount < completedTransactions.length && (
         <button onClick={handleReadMore} className="read-more-button">
           Read More
         </button>
@@ -51,7 +58,7 @@ const OnHoldTransactions: React.FC = () => {
   );
 };
 
-export default OnHoldTransactions;
+export default DoneTransactions;
 
 function calculateTimeLeft(maxHoldTime: number): string {
   const currentTime = Date.now();
