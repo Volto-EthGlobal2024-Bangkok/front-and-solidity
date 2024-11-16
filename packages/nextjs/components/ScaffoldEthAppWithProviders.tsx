@@ -19,8 +19,6 @@ const queryClient = new QueryClient({
 const ScaffoldEthAppWithProviders = ({ children }: { children: React.ReactNode }) => {
   const auth = useWeb3Auth();
 
-  console.log(auth);
-
   return (
     <QueryClientProvider client={queryClient}>
       <ProgressBar height="3px" color="#2299dd" />

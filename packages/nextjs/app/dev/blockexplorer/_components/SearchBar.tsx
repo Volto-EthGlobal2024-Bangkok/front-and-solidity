@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { isAddress, isHex } from "viem";
 import { hardhat } from "viem/chains";
 import { usePublicClient } from "wagmi";
@@ -18,7 +18,7 @@ export const SearchBar = () => {
       try {
         const tx = await client?.getTransaction({ hash: searchInput });
         if (tx) {
-          router.push(`/blockexplorer/transaction/${searchInput}`);
+          router.push(`/dev/blockexplorer/transaction/${searchInput}`);
           return;
         }
       } catch (error) {
@@ -27,7 +27,7 @@ export const SearchBar = () => {
     }
 
     if (isAddress(searchInput)) {
-      router.push(`/blockexplorer/address/${searchInput}`);
+      router.push(`/dev/blockexplorer/address/${searchInput}`);
       return;
     }
   };

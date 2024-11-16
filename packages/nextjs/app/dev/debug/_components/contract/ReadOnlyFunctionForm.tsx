@@ -1,20 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { InheritanceTooltip } from "./InheritanceTooltip";
 import { Abi, AbiFunction } from "abitype";
+import { useEffect, useState } from "react";
 import { Address } from "viem";
 import { useReadContract } from "wagmi";
+import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
+import { getParsedError, notification } from "~~/utils/scaffold-eth";
+import { ContractInput } from "./ContractInput";
+import { InheritanceTooltip } from "./InheritanceTooltip";
 import {
-  ContractInput,
-  displayTxResult,
   getFunctionInputKey,
   getInitialFormState,
   getParsedContractFunctionArgs,
   transformAbiFunction,
-} from "~~/app/debug/_components/contract";
-import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
-import { getParsedError, notification } from "~~/utils/scaffold-eth";
+} from "./utilsContract";
+import { displayTxResult } from "./utilsDisplay";
 
 type ReadOnlyFunctionFormProps = {
   contractAddress: Address;
