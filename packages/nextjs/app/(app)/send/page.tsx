@@ -7,7 +7,7 @@ import { useAccount } from "../account-components/AccountContext";
 import { useTokens, type Token } from "../(dashboard)/assets/TokenContext";
 
 export default function SendPage() {
-  const { addresses, selectedAddress, setSelectedAddress } = useAccount();
+  const { addresses, selectedAddress } = useAccount();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedToken, setSelectedToken] = useState<Token | null>(null);
   const [saveGasEnabled, setSaveGasEnabled] = useState(false);
@@ -34,25 +34,10 @@ export default function SendPage() {
       {/* Sender Selection - Updated */}
       <div className="flex flex-col gap-2">
         <label className="text-sm">Sender</label>
-        <div className="dropdown dropdown-bottom w-full">
-          <div tabIndex={0} role="button" className="btn w-full justify-between">
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-6 bg-base-300 rounded-full" />
-              <AddressWithoutCopy address={selectedAddress} format="long" />
-            </div>
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-            </svg>
+        <div className="btn w-full justify-between">
+          <div className="flex items-center gap-2">
+            <AddressWithoutCopy address={addresses[0]} format="long" />
           </div>
-          <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-full">
-            {addresses.map((address) => (
-              <li key={address}>
-                <div className="w-full" onClick={() => setSelectedAddress(address)}>
-                  <AddressWithoutCopy address={address} format="long" />
-                </div>
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
 

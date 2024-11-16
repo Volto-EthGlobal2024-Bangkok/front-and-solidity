@@ -5,6 +5,7 @@ import { clsx } from "~~/components/utils";
 import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import { useAccount } from "~~/app/(app)/account-components/AccountContext";
 import { AddressWithoutCopy } from "./AddressWitoutCopy";
+import { useRouter } from "next/navigation";
 
 interface BalanceCardProps {
   className?: string;
@@ -12,6 +13,7 @@ interface BalanceCardProps {
 
 export const BalanceCard = ({ className }: BalanceCardProps) => {
   const { selectedAddress } = useAccount();
+  const router = useRouter();
 
   return (
     <div className={clsx("card bg-base-100 shadow-xl", className)}>
@@ -24,7 +26,9 @@ export const BalanceCard = ({ className }: BalanceCardProps) => {
             </div>
           </div>
           <div className="flex gap-2 w-full">
-            <button className="btn btn-sm gap-2 flex-1">
+            <button className="btn btn-sm gap-2 flex-1" onClick={() => {
+              router.push("/send");
+            }}>
               <PaperAirplaneIcon className="h-4 w-4" />
               Send To
             </button>
