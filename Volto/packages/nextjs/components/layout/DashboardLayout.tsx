@@ -10,6 +10,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { ReactNode, useState } from "react";
+import { clsx } from "../utils";
 
 interface SidebarLink {
   name: string;
@@ -18,20 +19,8 @@ interface SidebarLink {
   current: boolean;
 }
 
-interface Wallet {
-  id: number;
-  name: string;
-  href: string;
-  initial: string;
-  current: boolean;
-}
-
 interface DashboardLayoutProps {
   children: ReactNode;
-}
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
 }
 
 const navigation: SidebarLink[] = [
@@ -86,7 +75,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                         <li key={item.name} className="w-full">
                           <a
                             href={item.href}
-                            className={classNames(
+                            className={clsx(
                               item.current
                                 ? "bg-primary text-primary"
                                 : "text-base hover:bg-primary hover:text-primary",
@@ -95,7 +84,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                           >
                             <item.icon
                               aria-hidden="true"
-                              className={classNames(
+                              className={clsx(
                                 item.current ? "text-primary" : "text-primary/80 group-hover:text-primary",
                                 "size-6 shrink-0",
                               )}
@@ -114,7 +103,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                           <li key={item.name} className="w-full">
                             <a
                               href={item.href}
-                              className={classNames(
+                              className={clsx(
                                 item.current
                                   ? "bg-primary text-primary"
                                   : "text-base hover:bg-primary hover:text-primary",
@@ -123,7 +112,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                             >
                               <item.icon
                                 aria-hidden="true"
-                                className={classNames(
+                                className={clsx(
                                   item.current ? "text-primary" : "text-primary/80 group-hover:text-primary",
                                   "size-6 shrink-0",
                                 )}
@@ -163,14 +152,14 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                     <li key={item.name}>
                       <a
                         href={item.href}
-                        className={classNames(
+                        className={clsx(
                           item.current ? "bg-base-200 text-primary" : "text-base hover:bg-base-200 hover:text-primary",
                           "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
                         )}
                       >
                         <item.icon
                           aria-hidden="true"
-                          className={classNames(
+                          className={clsx(
                             item.current ? "text-primary" : "text-primary/80 group-hover:text-primary",
                             "size-6 shrink-0",
                           )}
@@ -188,14 +177,14 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                     <li key={item.name}>
                       <a
                         href={item.href}
-                        className={classNames(
+                        className={clsx(
                           item.current ? "bg-base-200 text-primary" : "text-base hover:bg-base-200 hover:text-primary",
                           "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
                         )}
                       >
                         <item.icon
                           aria-hidden="true"
-                          className={classNames(
+                          className={clsx(
                             item.current ? "text-primary" : "text-primary/80 group-hover:text-primary",
                             "size-6 shrink-0",
                           )}
