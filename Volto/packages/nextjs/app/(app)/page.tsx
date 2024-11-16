@@ -1,12 +1,16 @@
 "use client";
 
 import type { NextPage } from "next";
+import DashboardToolbar from "~~/components/dashboard/DashboardToolbar";
 import { AccountCard } from "~~/components/dashboard/cards/AccountCard";
 import { TokensCard } from "~~/components/dashboard/cards/TokensCard";
 
 const Dashboard: NextPage = () => {
   return (
     <main className="flex flex-col gap-4">
+      <section>
+        <DashboardToolbar />
+      </section>
       <section className="flex flex-row gap-4 flex-wrap">
         <AccountCard
           className="flex-grow"
