@@ -6,6 +6,7 @@ import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
 import { useWatchBalance } from "~~/hooks/scaffold-eth/useWatchBalance";
 import { useGlobalState } from "~~/services/store/store";
 
+
 type BalanceProps = {
   address?: Address;
   className?: string;
@@ -32,11 +33,8 @@ export const Balance = ({ address, className = "", usdMode }: BalanceProps) => {
 
   if (!address || isLoading || balance === null || (isNativeCurrencyPriceFetching && nativeCurrencyPrice === 0)) {
     return (
-      <div className="animate-pulse flex space-x-4">
-        <div className="rounded-md bg-slate-300 h-6 w-6"></div>
-        <div className="flex items-center space-y-6">
-          <div className="h-2 w-28 bg-slate-300 rounded"></div>
-        </div>
+      <div className="flex items-center gap-2">
+        <span className="text-sm">Loading...</span>
       </div>
     );
   }
