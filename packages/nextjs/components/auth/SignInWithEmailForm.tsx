@@ -1,5 +1,7 @@
 "use client";
 
+import { WALLET_ADAPTERS } from "@web3auth/base";
+import { useWeb3Auth } from "@web3auth/no-modal-react-hooks";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { Logo } from "../Logo";
@@ -9,6 +11,7 @@ type FormInputs = {
 };
 
 export const SigninWithEmailForm = () => {
+  const auth = useWeb3Auth();
   const router = useRouter();
 
   const {
@@ -17,8 +20,11 @@ export const SigninWithEmailForm = () => {
     formState: { errors },
   } = useForm<FormInputs>();
 
-  const onSubmit = (data: FormInputs) => {
-    console.log(data);
+  const onSubmit = async ({ email }: FormInputs) => {
+    await auth.connectTo(WALLET_ADAPTERS.AUTH, {
+      loginProvider: "email_passwordless",
+      extraLoginOptions: { login_hint: email.trim() },
+    });
     router.push("/assets");
   };
 

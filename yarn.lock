@@ -3441,6 +3441,21 @@
     "@walletconnect/window-getters" "^1.0.1"
     tslib "1.14.1"
 
+"@web3auth/account-abstraction-provider@^9.4.0":
+  version "9.4.0"
+  resolved "https://registry.yarnpkg.com/@web3auth/account-abstraction-provider/-/account-abstraction-provider-9.4.0.tgz#09d8a2c239536d9c4b77f744922d9e4e0bf1d021"
+  integrity sha512-Xc9/jLGcC+6Mga/Pl+VxnHyWvPZHkFUu+brAIwbd85X10k1OPYgr6xCLR5rhLnXb7fQ1NXC53vIodnLl28AnHw==
+  dependencies:
+    "@ethereumjs/util" "^9.1.0"
+    "@toruslabs/base-controllers" "^6.2.4"
+    "@web3auth/auth" "^9.5.0"
+    "@web3auth/base" "^9.4.0"
+    "@web3auth/base-provider" "^9.4.0"
+    "@web3auth/ethereum-provider" "^9.4.0"
+    ethers "^6.13.4"
+    permissionless "^0.2.15"
+    viem "^2.21.43"
+
 "@web3auth/auth-adapter@^9.4.0":
   version "9.4.0"
   resolved "https://registry.yarnpkg.com/@web3auth/auth-adapter/-/auth-adapter-9.4.0.tgz#b580cb9797cea43bf86d0a43c2b4973530ea00d3"
@@ -8928,6 +8943,11 @@ pend@~1.2.0:
   resolved "https://registry.yarnpkg.com/pend/-/pend-1.2.0.tgz#7a57eb550a6783f9115331fcf4663d5c8e007a50"
   integrity sha512-F3asv42UuXchdzt+xXqfW1OGlVBe+mxa2mqI0pg5yAHZPvFmY3Y6drSf/GQ1A86WgWEN9Kzh/WrgKa6iGcHXLg==
 
+permissionless@^0.2.15:
+  version "0.2.17"
+  resolved "https://registry.yarnpkg.com/permissionless/-/permissionless-0.2.17.tgz#fca70dededbd4a7006de08988003042c184dc6f3"
+  integrity sha512-M2+8qXNWTo2mmiriBhCFtNUOKd8UDJ1AXNnLflJw9VePIv5PNR1QqkTa76wWb1mzoZyc1hVObmA0pi7puCBj3A==
+
 picocolors@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/picocolors/-/picocolors-1.0.0.tgz#cb5bdc74ff3f51892236eaf79d68bc44564ab81c"
@@ -11041,7 +11061,7 @@ viem@^1.1.4:
     isows "1.0.3"
     ws "8.13.0"
 
-viem@^2.1.1:
+viem@^2.1.1, viem@^2.21.43:
   version "2.21.45"
   resolved "https://registry.yarnpkg.com/viem/-/viem-2.21.45.tgz#7a445428d4909cc334f231ee916ede1b69190603"
   integrity sha512-I+On/IiaObQdhDKWU5Rurh6nf3G7reVkAODG5ECIfjsrGQ3EPJnxirUPT4FNV6bWER5iphoG62/TidwuTSOA1A==
