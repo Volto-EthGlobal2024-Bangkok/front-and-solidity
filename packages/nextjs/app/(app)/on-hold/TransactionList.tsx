@@ -1,9 +1,13 @@
 import React from 'react';
-import TransactionItem from './TransactionItem';
+import TransactionItem from "./TransactionItem";
 
 interface Transaction {
+  id: string;
   amount: string;
-  receiverAddress: string;
+  date: string;
+  status: string;
+  from: string;
+  to: string;
   token: string;
   chain: string;
   timeLeft: string;
@@ -15,13 +19,9 @@ interface TransactionListProps {
 
 const TransactionList: React.FC<TransactionListProps> = ({ transactions }) => {
   return (
-    <div className="transaction-list">
-      {transactions.map((transaction, index) => (
-        <TransactionItem
-          key={index}
-          transaction={transaction}
-          onClick={() => console.log(`Clicked on transaction to ${transaction.receiverAddress}`)}
-        />
+    <div>
+      {transactions.map(transaction => (
+        <TransactionItem key={transaction.id} transaction={transaction} onClick={() => {}} />
       ))}
     </div>
   );

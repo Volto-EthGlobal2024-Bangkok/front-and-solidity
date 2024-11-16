@@ -24,7 +24,15 @@ const OnHoldTransactions: React.FC = () => {
       <TransactionList 
         transactions={transactions.slice(0, visibleCount).map(transaction => ({
           ...transaction,
-          timeLeft: calculateTimeLeft(transaction.maxHoldTime),
+          timeLeft: calculateTimeLeft(Number(transaction.timeLeft)),
+          id: transaction.id,
+          amount: transaction.amount,
+          date: transaction.date,
+          status: transaction.status,
+          from: transaction.from,
+          to: transaction.to,
+          token: transaction.token,
+          chain: transaction.chain,
         }))}/>
       {visibleCount < transactions.length && (
         <button onClick={handleReadMore} className="read-more-button">
@@ -41,5 +49,5 @@ export default OnHoldTransactions;
 function calculateTimeLeft(maxHoldTime: number): string {
   const currentTime = Date.now();
   const timeLeft = maxHoldTime - currentTime;
-  return timeLeft > 0 ? `${Math.floor(timeLeft / 1000)} seconds` : "Expired";
+  return timeLeft > 0 ? `${Math.floor(timeLeft / 1000)} seconds` : "Done";
 }

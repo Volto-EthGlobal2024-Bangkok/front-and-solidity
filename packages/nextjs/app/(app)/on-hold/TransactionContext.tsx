@@ -1,11 +1,15 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { ReactNode, createContext, useContext, useState } from "react";
 
 interface Transaction {
+  id: string;
   amount: string;
-  receiverAddress: string;
+  date: string;
+  status: string;
+  from: string;
+  to: string;
   token: string;
   chain: string;
-  maxHoldTime: number;
+  timeLeft: string;
 }
 
 interface TransactionContextType {
@@ -28,21 +32,139 @@ interface TransactionProviderProps {
 }
 
 export const TransactionProvider: React.FC<TransactionProviderProps> = ({ children }) => {
-  // Hardcoded transactions
+  // Updated hardcoded transactions with new fields
   const initialTransactions: Transaction[] = [
     {
+      id: "1",
       amount: "100",
-      receiverAddress: "0x1234567890abcdef",
+      date: new Date().toISOString(),
+      status: "pending",
+      from: "0xabcdef1234567890", 
+      to: "0x1234567890abcdef",
       token: "ETH",
       chain: "Ethereum",
-      maxHoldTime: Date.now() + 60000, // 1 minute from now
+      timeLeft: "1 minute",
     },
     {
+      id: "2", 
       amount: "200",
-      receiverAddress: "0xfedcba0987654321",
+      date: new Date().toISOString(),
+      status: "pending",
+      from: "0xfedcba0987654321",
+      to: "0xfedcba0987654321", 
       token: "BTC",
       chain: "Bitcoin",
-      maxHoldTime: Date.now() + 120000, // 2 minutes from now
+      timeLeft: "2 minutes",
+    },
+    {
+      id: "3",
+      amount: "150",
+      date: new Date().toISOString(),
+      status: "pending", 
+      from: "0x1a2b3c4d5e6f7890",
+      to: "0x9876543210fedcba",
+      token: "USDT",
+      chain: "Polygon",
+      timeLeft: "5 minutes",
+    },
+    {
+      id: "4",
+      amount: "300",
+      date: new Date().toISOString(),
+      status: "pending",
+      from: "0x2468ace0246810ac",
+      to: "0x1357bdf1357bdf13",
+      token: "MATIC",
+      chain: "Polygon",
+      timeLeft: "10 minutes",
+    },
+    {
+      id: "5",
+      amount: "500",
+      date: new Date().toISOString(),
+      status: "pending",
+      from: "0xaaaa1111bbbb2222",
+      to: "0xcccc3333dddd4444",
+      token: "USDC",
+      chain: "Ethereum",
+      timeLeft: "15 minutes",
+    },
+    {
+      id: "6",
+      amount: "1000",
+      date: new Date().toISOString(),
+      status: "pending",
+      from: "0x1111aaaa2222bbbb",
+      to: "0x3333cccc4444dddd",
+      token: "ETH",
+      chain: "Ethereum",
+      timeLeft: "20 minutes",
+    },
+    {
+      id: "7",
+      amount: "250",
+      date: new Date().toISOString(),
+      status: "pending",
+      from: "0xabcd1234efgh5678",
+      to: "0x8765hgfe4321dcba",
+      token: "BNB",
+      chain: "BSC",
+      timeLeft: "25 minutes",
+    },
+    {
+      id: "8",
+      amount: "750",
+      date: new Date().toISOString(),
+      status: "pending",
+      from: "0x9999888877776666",
+      to: "0x5555444433332222",
+      token: "AVAX",
+      chain: "Avalanche",
+      timeLeft: "30 minutes",
+    },
+    {
+      id: "9",
+      amount: "450",
+      date: new Date().toISOString(),
+      status: "pending",
+      from: "0xaaaa bbbbccccdddd",
+      to: "0xeeeeffffgggghhhh",
+      token: "SOL",
+      chain: "Solana",
+      timeLeft: "35 minutes",
+    },
+    {
+      id: "10",
+      amount: "600",
+      date: new Date().toISOString(),
+      status: "pending",
+      from: "0x1a1a2b2b3c3c4d4d",
+      to: "0x5e5e6f6f7g7g8h8h",
+      token: "DOT",
+      chain: "Polkadot",
+      timeLeft: "40 minutes",
+    },
+    {
+      id: "11",
+      amount: "800",
+      date: new Date().toISOString(),
+      status: "pending",
+      from: "0x2468ace02468ace0",
+      to: "0x1357bdf1357bdf13",
+      token: "LINK",
+      chain: "Ethereum",
+      timeLeft: "45 minutes",
+    },
+    {
+      id: "12",
+      amount: "900",
+      date: new Date().toISOString(),
+      status: "pending",
+      from: "0xabcdefabcdefabcd",
+      to: "0x1234567812345678",
+      token: "UNI",
+      chain: "Ethereum",
+      timeLeft: "50 minutes",
     },
     // Add more transactions as needed
   ];
