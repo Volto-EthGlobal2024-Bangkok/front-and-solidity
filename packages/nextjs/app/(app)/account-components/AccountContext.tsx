@@ -1,11 +1,13 @@
 "use client";
 
 import { createContext, useContext, useState, ReactNode } from "react";
+import { BrowserProvider } from "ethers";
 
 interface AccountContextType {
   addresses: string[];
   selectedAddress: string;
   email?: string;
+  connectWallet: () => Promise<void>;
   setSelectedAddress: (address: string) => void;
   addAddress: (address: string) => void;
   removeAddress: (address: string) => void;
@@ -14,25 +16,54 @@ interface AccountContextType {
 
 const AccountContext = createContext<AccountContextType | undefined>(undefined);
 
-export function AccountProvider({ children, initialAddresses = [
-  "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
-  "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
-  "0x90F79bf6EB2c4f870365E785982E1f101E93b906"
-] }: { children: ReactNode; initialAddresses?: string[] }) {
+export function AccountProvider({
+  children,
+  initialAddresses = [],
+}: {
+  children: ReactNode;
+  initialAddresses?: string[];
+}) {
+  const storedAddress = localStorage.getItem("selectedAddress") || initialAddresses[0] || "";
   const [addresses, setAddresses] = useState<string[]>(initialAddresses);
-  const [selectedAddress, setSelectedAddress] = useState<string>(initialAddresses[0] || "");
+  const [selectedAddress, setSelectedAddress] = useState<string>(storedAddress);
   const [email, setEmail] = useState<string>();
 
   const addAddress = (address: string) => {
-    if (!addresses.includes(address)) {
-      setAddresses([...addresses, address]);
+    if (!addresses.includes(address.toLowerCase())) {
+      setAddresses([...addresses, address.toLowerCase()]);
     }
   };
 
   const removeAddress = (address: string) => {
-    setAddresses(addresses.filter(addr => addr !== address));
-    if (selectedAddress === address) {
-      setSelectedAddress(addresses[0]);
+    setAddresses(addresses.filter(addr => addr.toLowerCase() !== address.toLowerCase()));
+    if (selectedAddress.toLowerCase() === address.toLowerCase()) {
+      setSelectedAddress(addresses[0] || "");
+      localStorage.removeItem("selectedAddress");
+    }
+  };
+
+  const connectWallet = async () => {
+    try {
+      if (typeof window.ethereum !== "undefined") {
+        const provider = new BrowserProvider(window.ethereum);
+        const accounts = await provider.listAccounts();
+
+        if (accounts.length > 0) {
+          const accountAddresses = await Promise.all(accounts.map(account => account.getAddress()));
+          setAddresses(accountAddresses.map(address => address.toLowerCase()));
+          setSelectedAddress(accountAddresses[0].toLowerCase());
+          localStorage.setItem("selectedAddress", accountAddresses[0].toLowerCase());
+        } else {
+          const newAccounts = await provider.send("eth_requestAccounts", []);
+          setAddresses(newAccounts.map((account: string) => account.toLowerCase()));
+          setSelectedAddress(newAccounts[0].toLowerCase());
+          localStorage.setItem("selectedAddress", newAccounts[0].toLowerCase());
+        }
+      } else {
+        console.error("MetaMask is not installed.");
+      }
+    } catch (error) {
+      console.error("Failed to connect wallet:", error);
     }
   };
 
@@ -42,6 +73,7 @@ export function AccountProvider({ children, initialAddresses = [
         addresses,
         selectedAddress,
         email,
+        connectWallet,
         setSelectedAddress,
         addAddress,
         removeAddress,
