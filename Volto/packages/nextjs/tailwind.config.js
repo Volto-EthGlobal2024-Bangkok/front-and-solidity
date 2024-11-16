@@ -1,85 +1,54 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const colors = require("tailwindcss/colors");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./app/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}", "./utils/**/*.{js,ts,jsx,tsx}"],
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
   plugins: [require("daisyui")],
   darkTheme: "dark",
   darkMode: ["selector", "[data-theme='dark']"],
-  // DaisyUI theme colors
   daisyui: {
     themes: [
       {
         light: {
-          primary: "#93BBFB",
-          "primary-content": "#212638",
-          secondary: "#DAE8FF",
-          "secondary-content": "#212638",
-          accent: "#93BBFB",
-          "accent-content": "#212638",
-          neutral: "#212638",
-          "neutral-content": "#ffffff",
-          "base-100": "#ffffff",
-          "base-200": "#f4f8ff",
-          "base-300": "#DAE8FF",
-          "base-content": "#212638",
-          info: "#93BBFB",
-          success: "#34EEB6",
-          warning: "#FFCF72",
-          error: "#FF8863",
-
-          "--rounded-btn": "9999rem",
-
-          ".tooltip": {
-            "--tooltip-tail": "6px",
-          },
-          ".link": {
-            textUnderlineOffset: "2px",
-          },
-          ".link:hover": {
-            opacity: "80%",
-          },
+          "color-scheme": "light",
+          primary: "#729B25",
+          secondary: colors.orange[500],
+          "secondary-content": colors.white,
+          accent: colors.cyan[600],
+          neutral: colors.slate[800],
+          "neutral-content": colors.slate[200],
+          "base-100": colors.white,
+          "base-200": colors.gray[100],
+          "base-300": colors.gray[200],
+          "base-content": colors.gray[800],
         },
       },
       {
         dark: {
-          primary: "#212638",
-          "primary-content": "#F9FBFF",
-          secondary: "#323f61",
-          "secondary-content": "#F9FBFF",
-          accent: "#4969A6",
-          "accent-content": "#F9FBFF",
-          neutral: "#F9FBFF",
-          "neutral-content": "#385183",
-          "base-100": "#385183",
-          "base-200": "#2A3655",
-          "base-300": "#212638",
-          "base-content": "#F9FBFF",
-          info: "#385183",
-          success: "#34EEB6",
-          warning: "#FFCF72",
-          error: "#FF8863",
-
-          "--rounded-btn": "9999rem",
-
-          ".tooltip": {
-            "--tooltip-tail": "6px",
-            "--tooltip-color": "oklch(var(--p))",
-          },
-          ".link": {
-            textUnderlineOffset: "2px",
-          },
-          ".link:hover": {
-            opacity: "80%",
-          },
+          "color-scheme": "dark",
+          primary: "#729B25",
+          secondary: colors.orange[500],
+          accent: colors.orange[600],
+          "base-100": colors.black,
+          "base-200": colors.gray[900],
+          "base-300": colors.gray[800],
+          "base-content": colors.gray[300],
+          neutral: colors.gray[700],
+          info: colors.blue[600],
+          success: colors.green[600],
+          warning: colors.yellow[400],
+          error: colors.red[600],
         },
       },
     ],
+    logs: false,
+    rounded: "0.75rem", // Slightly bigger than medium rounding
+    buttonBorderWidth: "0px", // Remove borders
+    buttonShadow: "none", // Remove shadows
   },
   theme: {
     extend: {
-      boxShadow: {
-        center: "0 0 12px -2px rgb(0 0 0 / 0.05)",
-      },
       animation: {
         "pulse-fast": "pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },

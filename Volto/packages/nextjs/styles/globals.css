@@ -9,6 +9,7 @@
 
 body {
   min-height: 100vh;
+  font-family: 'Montserrat Variable', sans-serif;
 }
 
 h1,
@@ -24,9 +25,9 @@ p {
 }
 
 .btn {
-  @apply shadow-md;
+  /* @apply shadow-md; */
 }
 
 .btn.btn-ghost {
-  @apply shadow-none;
+  /* @apply shadow-none; */
 }
