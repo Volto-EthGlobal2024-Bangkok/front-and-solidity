@@ -5,16 +5,16 @@ import {
   ArrowsRightLeftIcon,
   Bars3Icon,
   CogIcon,
+  CubeTransparentIcon,
   PaperAirplaneIcon,
+  PauseIcon,
   WalletIcon,
   XMarkIcon,
-  PauseIcon,
-  CubeTransparentIcon,
 } from "@heroicons/react/24/outline";
 import { ReactNode, useState } from "react";
 import { Logo } from "../Logo";
-import { clsx } from "../utils";
 import { AccountCard } from "../dashboard/cards/AccountCard";
+import { clsx } from "../utils";
 
 interface SidebarLink {
   name: string;
@@ -44,7 +44,6 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
 
   return (
     <>
-
       <Dialog open={sidebarOpen} onClose={setSidebarOpen} className="relative z-50 lg:hidden">
         <DialogBackdrop
           transition

@@ -1,14 +1,6 @@
-import "@fontsource-variable/montserrat";
-import "@rainbow-me/rainbowkit/styles.css";
 import { CHAIN_NAMESPACES, CustomChainConfig } from "@web3auth/base";
 import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
-import { Web3AuthContextConfig } from "@web3auth/no-modal-react-hooks";
-import ScaffoldEthAppWithProviders from "~~/components/ScaffoldEthAppWithProviders";
-import { ThemeProvider } from "~~/components/ThemeProvider";
-import "~~/styles/globals.css";
-import { getMetadata } from "~~/utils/scaffold-eth/getMetadata";
-
-export const metadata = getMetadata({ title: "Scaffold-ETH 2 App", description: "Built with 🏗 Scaffold-ETH 2" });
+import { Web3AuthContextConfig, Web3AuthProvider } from "@web3auth/no-modal-react-hooks";
 
 const chainConfig: CustomChainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
@@ -38,16 +30,11 @@ const web3Config: Web3AuthContextConfig = {
   },
 };
 
-const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <html suppressHydrationWarning>
-      <body>
-        <ThemeProvider enableSystem>
-          <ScaffoldEthAppWithProviders>{children}</ScaffoldEthAppWithProviders>
-        </ThemeProvider>
-      </body>
-    </html>
+export const withWeb3Auth =
+  (Component: ({ children }: { children: React.ReactNode }) => JSX.Element) =>
+  // eslint-disable-next-line react/display-name
+  (props: { children: React.ReactNode }) => (
+    <Web3AuthProvider config={web3Config}>
+      <Component {...props} />
+    </Web3AuthProvider>
   );
-};
-
-export default ScaffoldEthApp;
