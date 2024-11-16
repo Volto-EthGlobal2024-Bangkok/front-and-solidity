@@ -1,17 +1,18 @@
 "use client";
 
-import { PaperAirplaneIcon, PlusIcon } from "@heroicons/react/24/outline";
-import { useState, useRef, useEffect } from "react";
-import { Address, Balance } from "~~/components/scaffold-eth";
+import { PlusIcon } from "@heroicons/react/24/outline"
+import {  useRef, useEffect } from "react";
+import {  Balance } from "~~/components/scaffold-eth";
 import { clsx } from "~~/components/utils";
+import { useAccount } from "~~/app/(app)/account-components/AccountContext";
+import { AddressWithoutCopy } from "~~/components/dashboard/cards/AddressWitoutCopy";
 
 interface AccountCardProps {
-  addresses: string[];
   className?: string;
 }
 
-export const AccountCard = ({ addresses, className }: AccountCardProps) => {
-  const [selectedAddress, setSelectedAddress] = useState(addresses[0]);
+export const AccountCard = ({ className }: AccountCardProps) => {
+  const { addresses, selectedAddress, setSelectedAddress, addAddress } = useAccount();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -45,7 +46,7 @@ export const AccountCard = ({ addresses, className }: AccountCardProps) => {
         <div className="flex flex-col gap-3 h-full justify-between">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-            <div className="dropdown dropdown-start">
+              <div className="dropdown dropdown-start">
                 <label tabIndex={0} className="btn btn-ghost btn-sm">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -61,22 +62,28 @@ export const AccountCard = ({ addresses, className }: AccountCardProps) => {
                 <ul
                   tabIndex={0}
                   className="dropdown-content p-2 shadow bg-base-100 rounded-box"
-                  style={{ zIndex: 9999} }
+                  style={{ zIndex: 9999 }}
                 >
-                  {addresses.map(address => (
+                  {addresses.map((address: string) => (
                     <li key={address} onClick={() => setSelectedAddress(address)}>
-                      <Address address={address} format="long" />
+                      <AddressWithoutCopy address={address} format="long" />
                     </li>
                   ))}
                 </ul>
               </div>
-              <button className="btn btn-ghost btn-sm ml-2">
+              <button 
+                className="btn btn-ghost btn-sm ml-2"
+                onClick={() => {
+                  const newAddress = "0x..."; // Replace with actual new address logic
+                  addAddress(newAddress);
+                }}
+              >
                 <PlusIcon className="h-4 w-4" />
               </button>
             </div>
             <Balance address={selectedAddress} />
           </div>
-          <Address address={selectedAddress} format="long" className="truncate" />
+          <AddressWithoutCopy address={selectedAddress} format="long" className="truncate" />
           <div className="flex gap-2 w-full">
 {/*             <button className="btn btn-sm flex-1">
               <PaperAirplaneIcon className="h-4 w-4" />
