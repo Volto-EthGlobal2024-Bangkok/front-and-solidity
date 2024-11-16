@@ -5,13 +5,18 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/utils/cryptography/SignatureChecker.sol";
+import "@openzeppelin/contracts/utils/Address.sol";
 
-contract SimpleSmartWallet is Ownable {
+
+contract Wallet is Ownable {
     using Address for address;
 
     event Executed(address indexed target, uint256 value, bytes data);
     event TokenTransferred(address indexed token, address indexed to, uint256 amount);
     event NFTTransferred(address indexed token, address indexed to, uint256 tokenId);
+
+    constructor() Ownable(msg.sender) {
+    }
 
     /**
      * @dev Allows the owner to send Ether from the wallet.
@@ -41,7 +46,7 @@ contract SimpleSmartWallet is Ownable {
      * @dev Executes a generic transaction to another contract.
      */
     function executeTransaction(address target, uint256 value, bytes calldata data) external onlyOwner {
-        require(target.isContract(), "Target must be a contract");
+        require(isContract(target), "Target must be a contract");
         (bool success, ) = target.call{value: value}(data);
         require(success, "Transaction failed");
         emit Executed(target, value, data);
@@ -52,11 +57,16 @@ contract SimpleSmartWallet is Ownable {
      */
     function isValidSignature(bytes32 hash, bytes memory signature) public view returns (bytes4) {
         bool isValid = SignatureChecker.isValidSignatureNow(owner(), hash, signature);
-        return isValid ? 0x1626ba7e : 0xffffffff; // Return MAGIC_VALUE for valid signatures
+        return isValid ? bytes4(0x1626ba7e) : bytes4(0xffffffff); // Explicitly cast to bytes4
     }
 
     /**
      * @dev Allows the contract to receive Ether.
      */
     receive() external payable {}
+
+    function isContract(address account) internal view returns (bool) {
+        return account.code.length > 0;
+    }
+
 }
