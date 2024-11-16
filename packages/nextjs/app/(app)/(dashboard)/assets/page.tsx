@@ -3,8 +3,12 @@
 import React, { useState } from 'react';
 import TokenItem from './TokenItem';
 import { useTokens } from './TokenContext';
+import dynamic from 'next/dynamic';
+
+
 
 const DashboardAssets: React.FC = () => {
+  const IDKitWidgetComponent = dynamic(() => import('../../../../components/IDKitWidgetComponent'), { ssr: false });
   const tokens = useTokens();
   const [visibleCount, setVisibleCount] = useState(10);
   const [showMyTokens, setShowMyTokens] = useState(false);
@@ -19,6 +23,7 @@ const DashboardAssets: React.FC = () => {
 
   return (
     <div className="w-full">
+      <IDKitWidgetComponent />
       <div className="form-control mb-4">
         <label className="label cursor-pointer">
           <span className="label-text">Hide Zero Balances</span>
