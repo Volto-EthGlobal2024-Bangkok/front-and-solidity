@@ -24,8 +24,8 @@ interface DashboardLayoutProps {
 }
 
 const navigation: SidebarLink[] = [
-  { name: "Overview", href: "/overview", icon: WalletIcon, current: false },
-  { name: "Settings", href: "/settings", icon: CogIcon, current: false },
+  { name: "Overview", href: "/assets", icon: WalletIcon, current: false },
+  { name: "Settings", href: "/settings/accounts", icon: CogIcon, current: false },
 ];
 
 const actions: SidebarLink[] = [
