@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const colors = require("tailwindcss/colors");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./app/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}", "./utils/**/*.{js,ts,jsx,tsx}"],
@@ -9,49 +12,43 @@ module.exports = {
       {
         light: {
           "color-scheme": "light",
-          primary: "#8FB582",
-          secondary: "oklch(69.71% 0.329 342.55)",
-          "secondary-content": "oklch(98.71% 0.0106 342.55)",
-          accent: "oklch(76.76% 0.184 183.61)",
-          neutral: "#2B3440",
-          "neutral-content": "#D7DDE4",
-          "base-100": "oklch(100% 0 0)",
-          "base-200": "#F2F2F2",
-          "base-300": "#E5E6E6",
-          "base-content": "#1f2937",
+          primary: colors.green[400],
+          secondary: colors.orange[500],
+          "secondary-content": colors.white,
+          accent: colors.cyan[600],
+          neutral: colors.slate[800],
+          "neutral-content": colors.slate[200],
+          "base-100": colors.white,
+          "base-200": colors.gray[100],
+          "base-300": colors.gray[200],
+          "base-content": colors.gray[800],
         },
       },
-      {
-        dark: {
-          "color-scheme": "dark",
-          primary: "#9FC490",
-          secondary: "#373737",
-          accent: "#373737",
-          "base-100": "#000000",
-          "base-200": "#141414",
-          "base-300": "#262626",
-          "base-content": "#d6d6d6",
-          neutral: "#373737",
-          info: "#0000ff",
-          success: "#008000",
-          warning: "#ffff00",
-          error: "#ff0000",
-          "--rounded-box": "0",
-          "--rounded-btn": "0",
-          "--rounded-badge": "0",
-          "--animation-btn": "0",
-          "--animation-input": "0",
-          "--btn-focus-scale": "1",
-          "--tab-radius": "0",
-        },
-      },
+      // {
+      //   dark: {
+      //     "color-scheme": "dark",
+      //     primary: colors.green[600],
+      //     secondary: colors.orange[500],
+      //     accent: colors.orange[600],
+      //     "base-100": colors.black,
+      //     "base-200": colors.gray[900],
+      //     "base-300": colors.gray[800],
+      //     "base-content": colors.gray[300],
+      //     neutral: colors.gray[700],
+      //     info: colors.blue[600],
+      //     success: colors.green[600],
+      //     warning: colors.yellow[400],
+      //     error: colors.red[600],
+      //   },
+      // },
     ],
+    logs: false,
+    rounded: "0.75rem", // Slightly bigger than medium rounding
+    buttonBorderWidth: "0px", // Remove borders
+    buttonShadow: "none", // Remove shadows
   },
   theme: {
     extend: {
-      boxShadow: {
-        center: "0 0 12px -2px rgb(0 0 0 / 0.05)",
-      },
       animation: {
         "pulse-fast": "pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },

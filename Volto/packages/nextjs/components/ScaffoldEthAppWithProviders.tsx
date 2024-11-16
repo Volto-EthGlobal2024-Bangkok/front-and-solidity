@@ -18,7 +18,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
-      <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col min-h-screen bg-base-100/50">
         <Header />
         <main className="relative flex flex-col flex-1 min-h-screen">{children}</main>
         <Footer />

@@ -1,22 +1,26 @@
-import { Address } from "~~/components/scaffold-eth";
+import { PaperAirplaneIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { Address, Balance } from "~~/components/scaffold-eth";
 
 interface AccountCardProps {
   address: string;
-  balance: string;
 }
 
-export const AccountCard = ({ address, balance }: AccountCardProps) => {
+export const AccountCard = ({ address }: AccountCardProps) => {
   return (
-    <div className="card bg-base-100 shadow-xl">
+    <div className="card bg-base-100 shadow-xl max-w-[500px]">
       <div className="card-body p-4">
         <div className="flex flex-col gap-3">
-          <div className="flex items-center justify-between">
-            <Address address={address} format="long" />
-            <span className="text-lg font-bold">{balance}</span>
-          </div>
-          <div className="flex gap-2">
-            <button className="btn btn-primary flex-1">Add Account</button>
-            <button className="btn btn-secondary flex-1">Send</button>
+          <Balance address={address} />
+          <Address address={address} format="long" />
+          <div className="flex gap-2 w-full">
+            <button className="btn btn-neutral btn-sm gap-2 flex-1">
+              <PlusIcon className="h-4 w-4" />
+              Add Account
+            </button>
+            <button className="btn btn-neutral btn-sm gap-2 flex-1">
+              <PaperAirplaneIcon className="h-4 w-4" />
+              Send To
+            </button>
           </div>
         </div>
       </div>

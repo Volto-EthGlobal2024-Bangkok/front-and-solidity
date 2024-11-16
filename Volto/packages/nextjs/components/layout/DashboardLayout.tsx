@@ -96,7 +96,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                             <item.icon
                               aria-hidden="true"
                               className={classNames(
-                                item.current ? "text-primary" : "text-primary/60 group-hover:text-primary",
+                                item.current ? "text-primary" : "text-primary/80 group-hover:text-primary",
                                 "size-6 shrink-0",
                               )}
                             />
@@ -124,7 +124,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                               <item.icon
                                 aria-hidden="true"
                                 className={classNames(
-                                  item.current ? "text-primary" : "text-primary/60 group-hover:text-primary",
+                                  item.current ? "text-primary" : "text-primary/80 group-hover:text-primary",
                                   "size-6 shrink-0",
                                 )}
                               />
@@ -171,7 +171,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                         <item.icon
                           aria-hidden="true"
                           className={classNames(
-                            item.current ? "text-primary" : "text-primary/60 group-hover:text-primary",
+                            item.current ? "text-primary" : "text-primary/80 group-hover:text-primary",
                             "size-6 shrink-0",
                           )}
                         />
@@ -196,7 +196,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                         <item.icon
                           aria-hidden="true"
                           className={classNames(
-                            item.current ? "text-primary" : "text-primary/60 group-hover:text-primary",
+                            item.current ? "text-primary" : "text-primary/80 group-hover:text-primary",
                             "size-6 shrink-0",
                           )}
                         />
@@ -206,7 +206,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                   ))}
                 </ul>
               </li>
-              <li className="-mx-6 mt-auto">
+              {/* <li className="-mx-6 mt-auto">
                 <a
                   href="#"
                   className="flex items-center gap-x-4 px-6 py-3 text-sm/6 font-semibold text-base hover:bg-base-200"
@@ -219,7 +219,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                   <span className="sr-only">Your profile</span>
                   <span aria-hidden="true">Tom Cook</span>
                 </a>
-              </li>
+              </li> */}
             </ul>
           </nav>
         </div>
