@@ -45,11 +45,11 @@ export const AccountCard = ({ addresses, className }: AccountCardProps) => {
             <Address address={selectedAddress} format="long" />
           </div>
           <div className="flex gap-2 w-full">
-            <button className="btn btn-primary btn-sm gap-2 flex-1">
+            <button className="btn btn-sm gap-2 flex-1">
               <PlusIcon className="h-4 w-4" />
               Add Account
             </button>
-            <button className="btn btn-neutral btn-sm gap-2 flex-1">
+            <button className="btn btn-sm gap-2 flex-1">
               <PaperAirplaneIcon className="h-4 w-4" />
               Send To
             </button>

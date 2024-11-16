@@ -18,7 +18,7 @@ export const SigninWithEmailForm = () => {
 
   const onSubmit = (data: FormInputs) => {
     console.log(data);
-    router.push("/");
+    router.push("/assets");
   };
 
   return (
