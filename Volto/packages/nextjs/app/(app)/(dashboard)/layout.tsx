@@ -3,7 +3,33 @@
 import { DashboardTabs } from "~~/components/dashboard/DashboardTabs";
 import DashboardToolbar from "~~/components/dashboard/DashboardToolbar";
 import { AccountCard } from "~~/components/dashboard/cards/AccountCard";
+import { BalanceCard } from "~~/components/dashboard/cards/BalanceCard";
 import { TokensCard } from "~~/components/dashboard/cards/TokensCard";
+import { ResponsiveLine } from '@nivo/line';
+import CryptoTrendChart from "~~/components/CryptoTrendChart";
+
+const data = [
+  {
+    id: "crypto",
+    data: [
+      { x: "2023-01-01", y: 30000 },
+      { x: "2023-01-02", y: 29800 },
+      { x: "2023-01-03", y: 31200 },
+      { x: "2023-01-04", y: 30600 },
+      { x: "2023-01-05", y: 32100 },
+      { x: "2023-01-06", y: 31400 },
+      { x: "2023-01-07", y: 29900 },
+      { x: "2023-01-08", y: 30800 },
+      { x: "2023-01-09", y: 32400 },
+      { x: "2023-01-10", y: 31700 },
+      { x: "2023-01-11", y: 30500 },
+      { x: "2023-01-12", y: 31900 },
+      { x: "2023-01-13", y: 33200 },
+      { x: "2023-01-14", y: 32100 },
+      { x: "2023-01-15", y: 32900 },
+    ],
+  },
+];
 
 const Dashboard = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -11,18 +37,14 @@ const Dashboard = ({ children }: { children: React.ReactNode }) => {
       <section>
         <DashboardToolbar />
       </section>
-      <section className="flex flex-row gap-6 flex-wrap">
-        <AccountCard
-          className="flex-grow"
-          addresses={[
-            "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
-            "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
-            "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
-          ]}
-        />
-        <TokensCard tokens={[]} />
+      <section className="flex flex-row gap-6">
+        <div className="flex-1">
+          <BalanceCard address="0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266" />
+        </div>
+        <div className="flex-1">
+          <CryptoTrendChart />
+        </div>
       </section>
-
       <DashboardTabs>{children}</DashboardTabs>
     </main>
   );

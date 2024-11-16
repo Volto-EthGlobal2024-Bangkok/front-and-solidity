@@ -73,6 +73,7 @@ type AddressProps = {
   format?: "short" | "long";
   size?: "xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "3xl";
   onlyEnsOrAddress?: boolean;
+  className?: string;
 };
 
 export const Address = ({
@@ -81,6 +82,7 @@ export const Address = ({
   format,
   size = "base",
   onlyEnsOrAddress = false,
+  className,
 }: AddressProps) => {
   const checkSumAddress = address ? getAddress(address) : undefined;
 
@@ -143,7 +145,7 @@ export const Address = ({
   const blockExplorerAddressLink = getBlockExplorerAddressLink(targetNetwork, checkSumAddress);
 
   return (
-    <div className="flex items-center flex-shrink-0">
+    <div className={`flex items-center flex-shrink-0 ${className}`}>
       <div className="flex-shrink-0">
         <BlockieAvatar
           address={checkSumAddress}

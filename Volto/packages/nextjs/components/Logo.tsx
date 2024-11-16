@@ -7,20 +7,24 @@ export const Logo = ({ className, size = "lg" }: { className?: string; size?: "l
       xmlns="http://www.w3.org/2000/svg"
       width={size === "sm" ? "38" : "200"}
       height={size === "sm" ? "38" : "200"}
-      fill-rule="evenodd"
-      clip-rule="evenodd"
-      image-rendering="optimizeQuality"
-      shape-rendering="geometricPrecision"
-      text-rendering="geometricPrecision"
+      fillRule="evenodd"
+      clipRule="evenodd"
+      imageRendering="optimizeQuality"
+      shapeRendering="geometricPrecision"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeMiterlimit="10"
+      strokeWidth="2"
+      fillOpacity="0.8"
       viewBox="0 0 2480 3507.43"
     >
       <path
         fill="transparent"
         stroke="#FEFEFE"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-miterlimit="22.926"
-        stroke-width="2.36"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeMiterlimit="22.926"
+        strokeWidth="2.36"
         d="M-.84 513.78h2480v2480H-.84z"
       />
       <path
@@ -29,7 +33,7 @@ export const Logo = ({ className, size = "lg" }: { className?: string; size?: "l
       />
       <path
         fill="#2D6409"
-        fill-opacity=".812"
+        fillOpacity=".812"
         d="M1354.02 2784.81 2417.73 1721.1l19.71-19.71v-1024c0-27.73-15.78-51.41-41.37-62.09-25.58-10.68-53.51-5.25-73.23 14.25l-375.89 371.78-707.79 700.06v1198.28l114.86-114.86z"
       />
     </svg>
