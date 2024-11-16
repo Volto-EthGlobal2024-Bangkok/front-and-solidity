@@ -2,9 +2,10 @@
 
 import { PlusIcon } from "@heroicons/react/24/outline"
 import {  useRef, useEffect } from "react";
-import { Address, Balance } from "~~/components/scaffold-eth";
+import {  Balance } from "~~/components/scaffold-eth";
 import { clsx } from "~~/components/utils";
 import { useAccount } from "~~/app/(app)/account-components/AccountContext";
+import { AddressWithoutCopy } from "~~/components/dashboard/cards/AddressWitoutCopy";
 
 interface AccountCardProps {
   className?: string;
@@ -65,7 +66,7 @@ export const AccountCard = ({ className }: AccountCardProps) => {
                 >
                   {addresses.map((address: string) => (
                     <li key={address} onClick={() => setSelectedAddress(address)}>
-                      <Address address={address} format="long" />
+                      <AddressWithoutCopy address={address} format="long" />
                     </li>
                   ))}
                 </ul>
@@ -82,7 +83,7 @@ export const AccountCard = ({ className }: AccountCardProps) => {
             </div>
             <Balance address={selectedAddress} />
           </div>
-          <Address address={selectedAddress} format="long" className="truncate" />
+          <AddressWithoutCopy address={selectedAddress} format="long" className="truncate" />
           <div className="flex gap-2 w-full">
 {/*             <button className="btn btn-sm flex-1">
               <PaperAirplaneIcon className="h-4 w-4" />

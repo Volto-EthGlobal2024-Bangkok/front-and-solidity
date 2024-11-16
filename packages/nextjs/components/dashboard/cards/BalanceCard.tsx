@@ -1,9 +1,10 @@
 "use client";
 
-import { Address, Balance } from "~~/components/scaffold-eth";
+import {  Balance } from "~~/components/scaffold-eth";
 import { clsx } from "~~/components/utils";
 import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import { useAccount } from "~~/app/(app)/account-components/AccountContext";
+import { AddressWithoutCopy } from "./AddressWitoutCopy";
 
 interface BalanceCardProps {
   className?: string;
@@ -17,7 +18,7 @@ export const BalanceCard = ({ className }: BalanceCardProps) => {
       <div className="card-body p-4">
         <div className="flex flex-col gap-4">
           <div className="flex flex-col items-center gap-3">
-            <Address address={selectedAddress} format="long" className="text-xs opacity-70" />
+            <AddressWithoutCopy address={selectedAddress} format="long" className="text-xs opacity-70" />
             <div className="text-7xl font-bold">
               <Balance address={selectedAddress} />
             </div>
