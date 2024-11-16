@@ -8,7 +8,7 @@ contract WalletFactory {
 
     function createWallet() external returns (address) {
         // Deploy a new wallet
-        SimpleSmartWallet wallet = new SimpleSmartWallet();
+        Wallet wallet = new Wallet();
         
         // Transfer ownership to the user
         wallet.transferOwnership(msg.sender);
