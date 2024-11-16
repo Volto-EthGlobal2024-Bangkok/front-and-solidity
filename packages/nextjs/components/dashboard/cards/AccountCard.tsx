@@ -84,11 +84,6 @@ export const AccountCard = ({ className }: AccountCardProps) => {
             <Balance address={selectedAddress} />
           </div>
           <AddressWithoutCopy address={selectedAddress} format="long" className="truncate" />
-          <div className="flex gap-2 w-full">
-{/*             <button className="btn btn-sm flex-1">
-              <PaperAirplaneIcon className="h-4 w-4" />
-            </button> */}
-          </div>
         </div>
       </div>
     </div>
