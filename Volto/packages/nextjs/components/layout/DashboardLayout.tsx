@@ -8,6 +8,8 @@ import {
   PaperAirplaneIcon,
   WalletIcon,
   XMarkIcon,
+  PauseIcon,
+  CubeTransparentIcon,
 } from "@heroicons/react/24/outline";
 import { ReactNode, useState } from "react";
 import { Logo } from "../Logo";
@@ -27,6 +29,8 @@ interface DashboardLayoutProps {
 const navigation: SidebarLink[] = [
   { name: "Overview", href: "/assets", icon: WalletIcon, current: false },
   { name: "Settings", href: "/settings/accounts", icon: CogIcon, current: false },
+  { name: "Transactions", href: "/on-hold", icon: CubeTransparentIcon, current: false },
+  { name: "Transactions On Hold", href: "/on-hold", icon: PauseIcon, current: false },
 ];
 
 const actions: SidebarLink[] = [
