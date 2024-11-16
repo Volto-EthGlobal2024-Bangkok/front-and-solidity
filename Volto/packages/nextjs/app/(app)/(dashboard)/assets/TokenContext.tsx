@@ -39,9 +39,5 @@ const TokenContext = createContext<Token[]>(tokens);
 export const useTokens = () => useContext(TokenContext);
 
 export const TokenProvider: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({ children }) => {
-  return (
-    <TokenContext.Provider value={tokens}>
-      {children}
-    </TokenContext.Provider>
-  );
-}; 
+  return <TokenContext.Provider value={tokens}>{children}</TokenContext.Provider>;
+};

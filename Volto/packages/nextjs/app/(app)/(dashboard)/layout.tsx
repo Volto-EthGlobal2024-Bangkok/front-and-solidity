@@ -2,11 +2,9 @@
 
 import { DashboardTabs } from "~~/components/dashboard/DashboardTabs";
 import DashboardToolbar from "~~/components/dashboard/DashboardToolbar";
-import { AccountCard } from "~~/components/dashboard/cards/AccountCard";
 import { BalanceCard } from "~~/components/dashboard/cards/BalanceCard";
-import { TokensCard } from "~~/components/dashboard/cards/TokensCard";
-import { ResponsiveLine } from '@nivo/line';
 import CryptoTrendChart from "~~/components/CryptoTrendChart";
+import { TransactionProvider } from "./on-hold/TransactionContext";
 
 const data = [
   {
@@ -41,11 +39,12 @@ const Dashboard = ({ children }: { children: React.ReactNode }) => {
         <div className="flex-1">
           <BalanceCard address="0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266" />
         </div>
-        <div className="flex-1">
+{/* {         <div className="flex-1">
           <CryptoTrendChart />
-        </div>
+        </div> } */}
       </section>
       <DashboardTabs>{children}</DashboardTabs>
+
     </main>
   );
 };
