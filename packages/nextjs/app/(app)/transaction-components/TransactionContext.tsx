@@ -1,3 +1,5 @@
+"use client";
+
 import React, { ReactNode, createContext, useContext, useState } from "react";
 
 interface Transaction {
@@ -171,7 +173,7 @@ export const TransactionProvider: React.FC<TransactionProviderProps> = ({ childr
   const [transactions, setTransactions] = useState<Transaction[]>(initialTransactions);
 
   const addTransaction = (transaction: Transaction) => {
-    setTransactions(prevTransactions => [...prevTransactions, transaction]);
+    setTransactions(transactions => [...transactions, transaction]);
   };
 
   return <TransactionContext.Provider value={{ transactions, addTransaction }}>{children}</TransactionContext.Provider>;

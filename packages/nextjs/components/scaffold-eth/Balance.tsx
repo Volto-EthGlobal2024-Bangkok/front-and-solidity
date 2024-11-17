@@ -34,7 +34,7 @@ export const Balance = ({ address, className = "", usdMode }: BalanceProps) => {
   if (!address || isLoading || balance === null || (isNativeCurrencyPriceFetching && nativeCurrencyPrice === 0)) {
     return (
       <div className="flex items-center gap-2">
-        <span className="text-sm">Loading...</span>
+        <img src="/zeleni-gif-KONACNO.gif" alt="Loading..." className="w-6 h-6 rounded-full shadow-lg" />
       </div>
     );
   }

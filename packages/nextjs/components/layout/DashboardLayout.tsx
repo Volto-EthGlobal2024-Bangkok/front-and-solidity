@@ -16,6 +16,8 @@ import { Logo } from "../Logo";
 import { clsx } from "../utils";
 import { AccountCard } from "../dashboard/cards/AccountCard";
 import dynamic from 'next/dynamic';
+import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
+
 
 interface SidebarLink {
   name: string;
@@ -28,7 +30,7 @@ interface DashboardLayoutProps {
   children: ReactNode;
 }
 
-const IDKitWidgetComponent = dynamic(() => import('../../components/IDKitWidgetComponent'), { ssr: false });
+const IDKitWidgetComponent = dynamic(() => import("../../components/IDKitWidgetComponent"), { ssr: false });
 
 const navigation: SidebarLink[] = [
   { name: "Overview", href: "/assets", icon: WalletIcon, current: false },
@@ -38,8 +40,6 @@ const navigation: SidebarLink[] = [
 
 ];
 
-
-
 const actions: SidebarLink[] = [
   { name: "Send", href: "/send", icon: PaperAirplaneIcon, current: false },
   { name: "Swap", href: "/swap", icon: ArrowsRightLeftIcon, current: false },
@@ -47,6 +47,19 @@ const actions: SidebarLink[] = [
 
 export function DashboardLayout({ children }: DashboardLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const { writeContractAsync: writeYourContractAsync } = useScaffoldWriteContract("WalletFactory");
+
+  const handleActivateWallet = async () => {
+    try {
+      const tx = await writeYourContractAsync({
+        functionName: "createWallet",
+      });
+      console.log("Wallet created successfully:", tx);
+    } catch (error) {
+      console.error("Error creating wallet:", error);
+    }
+  };
 
   return (
     <>
@@ -77,7 +90,9 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                 <span className="text-xl font-bold">Volto</span>
               </div>
               <AccountCard />
-              <button className="btn btn-primary w-full">Activate Wallet</button>
+              <button className="btn btn-primary w-full" onClick={handleActivateWallet}>
+                Activate Wallet
+              </button>
               <nav className="flex flex-1 flex-col">
                 <ul role="list" className="flex flex-1 flex-col gap-y-7">
                   <li>

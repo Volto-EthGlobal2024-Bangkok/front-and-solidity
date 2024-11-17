@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import { BrowserProvider } from "ethers";
 
 interface AccountContextType {
@@ -23,10 +23,17 @@ export function AccountProvider({
   children: ReactNode;
   initialAddresses?: string[];
 }) {
-  const storedAddress = localStorage.getItem("selectedAddress") || initialAddresses[0] || "";
+  const [storedAddress, setStoredAddress] = useState<string>(initialAddresses[0] || "");
   const [addresses, setAddresses] = useState<string[]>(initialAddresses);
   const [selectedAddress, setSelectedAddress] = useState<string>(storedAddress);
   const [email, setEmail] = useState<string>();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const address = localStorage.getItem("selectedAddress") || initialAddresses[0] || "";
+      setStoredAddress(address);
+    }
+  }, [initialAddresses]);
 
   const addAddress = (address: string) => {
     if (!addresses.includes(address.toLowerCase())) {
@@ -36,8 +43,7 @@ export function AccountProvider({
 
   const removeAddress = (address: string) => {
     setAddresses(addresses.filter(addr => addr.toLowerCase() !== address.toLowerCase()));
-    if (selectedAddress.toLowerCase() === address.toLowerCase()) {
-      setSelectedAddress(addresses[0] || "");
+    if (typeof window !== "undefined" && selectedAddress.toLowerCase() === address.toLowerCase()) {
       localStorage.removeItem("selectedAddress");
     }
   };
@@ -52,12 +58,16 @@ export function AccountProvider({
           const accountAddresses = await Promise.all(accounts.map(account => account.getAddress()));
           setAddresses(accountAddresses.map(address => address.toLowerCase()));
           setSelectedAddress(accountAddresses[0].toLowerCase());
-          localStorage.setItem("selectedAddress", accountAddresses[0].toLowerCase());
+          if (typeof window !== "undefined") {
+            localStorage.setItem("selectedAddress", accountAddresses[0].toLowerCase());
+          }
         } else {
           const newAccounts = await provider.send("eth_requestAccounts", []);
           setAddresses(newAccounts.map((account: string) => account.toLowerCase()));
           setSelectedAddress(newAccounts[0].toLowerCase());
-          localStorage.setItem("selectedAddress", newAccounts[0].toLowerCase());
+          if (typeof window !== "undefined") {
+            localStorage.setItem("selectedAddress", newAccounts[0].toLowerCase());
+          }
         }
       } else {
         console.error("MetaMask is not installed.");
@@ -80,7 +90,7 @@ export function AccountProvider({
         setEmail,
       }}
     >
-      {children}
+      {storedAddress && children}
     </AccountContext.Provider>
   );
 }
